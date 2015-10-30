@@ -12,6 +12,8 @@
 		39FD36B21BE31796008C08A0 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FD36B11BE31796008C08A0 /* Profile.swift */; };
 		39FD36B41BE326B2008C08A0 /* SessionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FD36B31BE326B2008C08A0 /* SessionTableViewCell.swift */; };
 		39FD36B61BE32C75008C08A0 /* SessionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FD36B51BE32C75008C08A0 /* SessionTableViewController.swift */; };
+		39FD36B81BE3577B008C08A0 /* TuteeSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FD36B71BE3577B008C08A0 /* TuteeSession.swift */; };
+		39FD36BA1BE3578C008C08A0 /* TutorSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FD36B91BE3578C008C08A0 /* TutorSession.swift */; };
 		7E2C70C31BDDA834000F7F0F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2C70C21BDDA834000F7F0F /* AppDelegate.swift */; };
 		7E2C70C51BDDA834000F7F0F /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E2C70C41BDDA834000F7F0F /* LaunchViewController.swift */; };
 		7E2C70C81BDDA834000F7F0F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E2C70C61BDDA834000F7F0F /* Main.storyboard */; };
@@ -54,6 +56,8 @@
 		39FD36B11BE31796008C08A0 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		39FD36B31BE326B2008C08A0 /* SessionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionTableViewCell.swift; sourceTree = "<group>"; };
 		39FD36B51BE32C75008C08A0 /* SessionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionTableViewController.swift; sourceTree = "<group>"; };
+		39FD36B71BE3577B008C08A0 /* TuteeSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TuteeSession.swift; sourceTree = "<group>"; };
+		39FD36B91BE3578C008C08A0 /* TutorSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorSession.swift; sourceTree = "<group>"; };
 		479FD915146CC99E76693270 /* Pods-B2BTutoring.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-B2BTutoring.release.xcconfig"; path = "Pods/Target Support Files/Pods-B2BTutoring/Pods-B2BTutoring.release.xcconfig"; sourceTree = "<group>"; };
 		7E2C70BF1BDDA834000F7F0F /* B2BTutoring.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = B2BTutoring.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E2C70C21BDDA834000F7F0F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -207,6 +211,8 @@
 			isa = PBXGroup;
 			children = (
 				39FD36B11BE31796008C08A0 /* Profile.swift */,
+				39FD36B71BE3577B008C08A0 /* TuteeSession.swift */,
+				39FD36B91BE3578C008C08A0 /* TutorSession.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -369,8 +375,10 @@
 			files = (
 				39FD36AC1BE3147C008C08A0 /* ProfileTableViewController.swift in Sources */,
 				7E2C70F31BDDBD80000F7F0F /* LoginPhoneNumberViewController.swift in Sources */,
+				39FD36B81BE3577B008C08A0 /* TuteeSession.swift in Sources */,
 				7EFEB6B21BDF393D00D644A9 /* JiroTextField.swift in Sources */,
 				7EFEB6B31BDF393D00D644A9 /* KaedeTextField.swift in Sources */,
+				39FD36BA1BE3578C008C08A0 /* TutorSession.swift in Sources */,
 				7EB0581F1BDDE5F100342F29 /* NumberButtonView.swift in Sources */,
 				7EFEB6AE1BDF393D00D644A9 /* AkiraTextField.swift in Sources */,
 				7E4BECA81BE1DADF00D74DEB /* LoginConfirmationViewController.swift in Sources */,

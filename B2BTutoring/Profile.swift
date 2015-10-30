@@ -17,7 +17,7 @@ class Profile {
             self.value = v;
         }
     }
-    
+
     let info = [
         Entry(k: "Name", v: "Darth Vader"),
         Entry(k: "Gender", v: "Male"),

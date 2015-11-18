@@ -160,36 +160,32 @@ class EditProfileViewController: FormViewController {
     
 
     func validate(fields: [String: Any?]) -> String? {
-        /*
-        if fields["Title"] as? String == nil {
-            return "Title can't be empty!"
+        if fields["First"] as? String == nil {
+            return "First name can't be empty!"
         }
-        if fields["Location"] as? String == nil {
-            return "Location can't be empty!"
+        if fields["Last"] as? String == nil {
+            return "Last name can't be empty!"
         }
-        if fields["Description"] as? String == nil {
-            return "Description can't be empty!"
+        if fields["Email"] as? String == nil {
+            return "Email can't be empty!"
         }
-        if let start_date = fields["Starts"] as? NSDate {
-            if start_date.compare(NSDate()) == .OrderedAscending {
-                return "Starts date must be in the future!"
-            }
-        } else {
-            return "Starts date can't be empty!"
+        if fields["Password"] as? String == nil {
+            return "Password can't be empty!"
         }
-        if let end_date = fields["Ends"] as? NSDate {
-            if end_date.compare(NSDate()) == .OrderedAscending {
-                return "Ends date must be in the future!"
-            }
-        } else {
-            return "Ends date can't be empty!"
+        if fields["Intro"] as? String == nil {
+            return "Intro can't be empty!"
         }
-        */
+        if fields["Profile"] as? UIImage == nil {
+            return "Profile can't be empty!"
+        }
+        if fields["Background"] as? UIImage == nil {
+            return "Background can't be empty!"
+        }
         return nil
     }
     
     func alertHandler(alert: UIAlertAction!) -> Void {
-        performSegueWithIdentifier("UnwindToSchedule", sender: self)
+        performSegueWithIdentifier("unwindToProfileTab", sender: self)
     }
     
     func createAlert(message: String, unwind: Bool) -> Void {
@@ -199,47 +195,40 @@ class EditProfileViewController: FormViewController {
     }
     
     @IBAction func editProfile(sender: UIBarButtonItem) {
-        let session = Session()
+        // let session = Session()
         let values = self.form.values()
         let errorMsg = validate(values)
         if errorMsg == nil {
-            /*
-            user.title = values["Title"] as! String
-            session.location = values["Location"] as! String
-            session.tags = values["Tags"] as? String
-            session.descrip = values["Description"] as! String
-            session.starts = values["Starts"] as! NSDate
-            session.ends = values["Ends"] as! NSDate
-            let c = values["Category"] as! Category
-            session.category =  c.description
-            session.saveInBackgroundWithBlock {
-                (success: Bool, error: NSError?) -> Void in
-                if (success) {
-                    if let currentUser = User.currentUser() {
-                        User.objectWithoutDataWithObjectId(currentUser.objectId).fetchInBackgroundWithBlock {
-                            (object: PFObject?, error: NSError?) -> Void in
-                            if error == nil {
-                                if let user = object as? User {
-                                    user.tutorSessions?.append(session)
-                                    user.saveInBackgroundWithBlock {
-                                        (succeeded: Bool, error: NSError?) -> Void in
-                                        if (succeeded) {
-                                            self.createAlert("Successfully created session!", unwind: true)
-                                        } else {
-                                            print("Error updating user")
-                                        }
-                                    }
+            if let currentUser = User.currentUser() {
+                User.objectWithoutDataWithObjectId(currentUser.objectId).fetchInBackgroundWithBlock {
+                    (object: PFObject?, error: NSError?) -> Void in
+                    if error == nil {
+                        if let user = object as? User {
+                            // update user
+                            user.firstname = values["First"] as! String
+                            user.lastname = values["Last"] as! String
+                            user.password = values["Password"] as? String
+                            user.email = values["Email"] as? String
+                            user.intro = values["Intro"] as? String
+                            // TODO: save user's interest;
+                            let profile = UIImageJPEGRepresentation(values["Profile"] as! UIImage, 0.5)
+                            user.profileImage = PFFile(name: "profile.jpg", data: profile!)!
+                            let background = UIImageJPEGRepresentation(values["Background"] as! UIImage, 0.5)
+                            user.backgroundImage = PFFile(name: "background.jpg", data: background!)!
+                            user.saveInBackgroundWithBlock {
+                                (succeeded: Bool, error: NSError?) -> Void in
+                                if (succeeded) {
+                                    self.createAlert("Successfully edited profile", unwind: true)
+                                } else {
+                                    print("Error updating user")
                                 }
-                            } else {
-                                print("Error retrieving user sessions")
                             }
                         }
+                    } else {
+                        print("Error saving the edited profile")
                     }
-                } else {
-                    self.createAlert("Unable to create session due to server error.", unwind: true)
                 }
             }
-            */
         } else {
             createAlert(errorMsg!, unwind: false)
         }

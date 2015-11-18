@@ -8,6 +8,15 @@
 
 import UIKit
 
+class Entry {
+    let key : String
+    let value : String
+    init(k : String, v : String) {
+        self.key = k;
+        self.value = v;
+    }
+}
+
 class ProfileTableViewController: UITableViewController {
     
     @IBOutlet weak var headerView: UIView!
@@ -15,7 +24,8 @@ class ProfileTableViewController: UITableViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var profileSegmentedControl: UISegmentedControl!
     
-    let profile = Profile()
+    var info = [Entry(k: "Loading", v: "Loading")]
+    //let profile = Profile()
     let tuteeSession = TuteeSession()
     let tutorSession = TutorSession()
     
@@ -29,7 +39,31 @@ class ProfileTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        nameLabel.text = profile.info[0].value
+        if let currentUser = User.currentUser() {
+            User.objectWithoutDataWithObjectId(currentUser.objectId).fetchInBackgroundWithBlock {
+                (object: PFObject?, error: NSError?) -> Void in
+                if error == nil {
+                    if let user = object as? User {
+                        self.nameLabel.text = user.firstname + " " + user.lastname
+                        self.info.removeAll()
+                        self.info.append(Entry(k: "Name", v: user.firstname + " " + user.lastname))
+                        if let email = user.email {
+                            self.info.append(Entry(k: "Email:", v: email))
+                        }
+                        if let phone = user.username {
+                            self.info.append(Entry(k: "Phone", v: phone))
+                        }
+                        if let intro = user.intro {
+                            self.info.append(Entry(k: "Info", v: intro))
+                        }
+                        self.tableView.reloadData()
+                    }
+                } else {
+                    print("Error loading user info")
+                }
+            }
+        }
+        
         self.tableView.tableHeaderView = self.headerView
         self.navigationItem.rightBarButtonItem?.enabled = true
         // Uncomment the following line to preserve selection between presentations
@@ -88,7 +122,7 @@ class ProfileTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         switch profileSegmentedControl.selectedSegmentIndex {
         case 0:
-            return profile.info.count-1
+            return info.count-1
         case 1:
             if section == 0 {
                 return 4
@@ -108,7 +142,7 @@ class ProfileTableViewController: UITableViewController {
         switch profileSegmentedControl.selectedSegmentIndex {
         case 0:
             let cell = tableView.dequeueReusableCellWithIdentifier("InfoTableViewCell", forIndexPath: indexPath) as! InfoTableViewCell
-            let entry = profile.info[indexPath.row+1]
+            let entry = info[indexPath.row+1]
             cell.keyLabel.text = entry.key
             cell.valueLabel.text = entry.value
             
